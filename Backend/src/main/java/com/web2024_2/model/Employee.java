@@ -29,6 +29,9 @@ public class Employee {
     private Position position;  // Relación con Posición
     
     private LocalDate entry_date;
+    
+    @Transient
+    private Long salary;
 }
 
 
