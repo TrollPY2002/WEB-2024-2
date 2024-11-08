@@ -1,32 +1,37 @@
 package com.web2024_2.model;
 
 import java.time.LocalDate;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
-@Entity@Data
+@Entity
+@Data
 public class Employee {
-	Department department= new Department();
-	Position position=new Position();
- @Id
- @GeneratedValue(strategy = GenerationType.IDENTITY)
- private Long id;
- @Column(unique = true)
- private String first_name;
- private String last_name;
- private LocalDate birthdate;
- private Long dep_id=department.getId();
- private Long pos_id=position.getId();
- private LocalDate entry_date;
- 
- 
-
-
-
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column(nullable = false)
+    private String first_name;
+    
+    @Column(nullable = false)
+    private String last_name;
+    
+    private LocalDate birthdate;
+    
+    @ManyToOne
+    @JoinColumn(name = "dep_id", nullable = false)
+    private Department department;  // Relación con Departamento
+    
+    @ManyToOne
+    @JoinColumn(name = "pos_id", nullable = false)
+    private Position position;  // Relación con Posición
+    
+    private LocalDate entry_date;
 }
+
+
+
+
 
